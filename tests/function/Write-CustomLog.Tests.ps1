@@ -1,7 +1,9 @@
 BeforeAll {
+    $helpersDirectory = Join-Path -Path (Split-Path -Path (Split-Path -Path $PSCommandPath -Parent) -Parent) -ChildPath 'helpers'
+    foreach ($helper in (Get-ChildItem -Path $helpersDirectory -Recurse -Include '*.ps1')) {
+        . $helper.FullName
+    }
     try {
-        $getEnvSetPath = Join-Path -Path (Split-Path -Path (Split-Path -Path $PSCommandPath -Parent) -Parent) -ChildPath 'getEnvironmentSetting.ps1'
-        . $getEnvSetPath
         $envSettings = Get-EnvironmentSetting -Path $PSCommandPath
     } catch {
         throw $_
@@ -29,26 +31,8 @@ BeforeAll {
     }
 }
 Describe "Write-CustomLog" -Tag 'function','public' {
-    It 'help section should have a SYNOPSIS' {
-        ((Get-Help "$($envSettings.CommandName)" -Full).SYNOPSIS).Length | Should -BeGreaterThan 0
-    }
-    It 'help section should have a DESCRIPTION' {
-        ((Get-Help "$($envSettings.CommandName)" -Full).DESCRIPTION).Length | Should -BeGreaterThan 0
-    }
-    It 'help section should have EXAMPLES' {
-        ((Get-Help "$($envSettings.CommandName)" -Full).EXAMPLES).Length | Should -BeGreaterThan 0
-    }
-    It 'should have a HelpUri' {
-        ((Get-Command "$($envSettings.CommandName)").HelpUri).Length | Should -BeGreaterThan 0
-    }
-    It 'all parameters should have a description' {
-        $commonParameters = [System.Management.Automation.PSCmdlet]::CommonParameters
-        $optionalCommonParameters = [System.Management.Automation.PSCmdlet]::OptionalCommonParameters
-        foreach ($param in (Get-Help -Name "$($envSettings.CommandName)" -Full).parameters.parameter) {
-            if ($commonParameters -notcontains $param.name -and $optionalCommonParameters -notcontains $param.name) {
-                ($param.description.Text).Length | Should -BeGreaterThan 0
-            }
-        }
+    It 'should have complete help section' {
+        {Test-HelpSection -CommandName "$($envSettings.CommandName)"} | Should -Not -Throw
     }
     It 'should have a parameter named Message' {
         Get-Command "$($envSettings.CommandName)" | Should -HaveParameter Message
