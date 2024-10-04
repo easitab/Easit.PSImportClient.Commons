@@ -63,9 +63,10 @@ function Write-CustomLog {
 
         [System.Object](https://learn.microsoft.com/en-us/dotnet/api/system.object)
     .OUTPUTS
-        None. This cmdlet returns no output
+        None. This function returns no output.
     #>
 	[CmdletBinding(HelpUri='https://docs.easitgo.com/techspace/psmodules/psimportclientcommons/functions/writecustomlog/')]
+    [OutputType()]
 	Param (
 		[Parameter(ValueFromPipeline,ParameterSetName='string')]
         [string]$Message,
