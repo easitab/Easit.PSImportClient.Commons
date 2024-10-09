@@ -49,6 +49,7 @@ Describe "Add-FileToArchive" -Tag 'function','public'{
         }
     }
     It 'should have complete help section' {
+        Write-Host $envSettings
         {Test-HelpSection -CommandName "$($envSettings.CommandName)"} | Should -Not -Throw
     }
     It 'should have a parameter named ArchiveDirectory that is mandatory and accepts a string' {

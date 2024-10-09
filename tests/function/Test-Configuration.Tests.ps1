@@ -71,7 +71,7 @@ Describe "Test-Configuration" -Tag 'function','public' {
         Get-LogFile -Path $envSettings.TestDataDirectory -Prefix $envSettings.LogPrefix -Suffix 'ERROR' | Should -Not -BeNullOrEmpty
     }
     AfterEach {
-        Get-ChildItem -Path $envSettings.TestDataDirectory -Recurse -Include "$($envSettings.LogPrefix)*" -File | Remove-Item -Force -Confirm:$false
+        Get-ChildItem -Path $envSettings.TestDataDirectory -Recurse -Include "$($envSettings.LogPrefix)*" -File | Remove-Item -Confirm:$false
     }
 }
 AfterAll {
