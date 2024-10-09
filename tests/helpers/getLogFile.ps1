@@ -3,9 +3,9 @@ function Get-LogFile {
     param (
         [Parameter(Mandatory)]
         [string]$Path,
-        [Parameter(Mandatory)]
+        [Parameter()]
         [string]$Prefix,
-        [Parameter(Mandatory)]
+        [Parameter()]
         [string]$Suffix
     )
     
