@@ -45,6 +45,7 @@ function Get-EnvironmentSetting {
             $returnObject | Add-Member -MemberType Noteproperty -Name "ProjectDirectory" -Value (Split-Path -Path $returnObject.TestsDirectory -Parent)
             $returnObject | Add-Member -MemberType Noteproperty -Name "SourceDirectory" -Value (Join-Path -Path $returnObject.ProjectDirectory -ChildPath "source")
             $returnObject | Add-Member -MemberType Noteproperty -Name "CodeFilePath" -Value (Get-ChildItem -Path $returnObject.SourceDirectory -Include $returnObject.CodeFileName -Recurse)
+            $returnObject | Add-Member -MemberType Noteproperty -Name "ErrorFilePath" -Value (Join-Path -Path $returnObject.TestDataDirectory -ChildPath $returnObject.LogPrefix)
         } catch {
             throw $_
         }
