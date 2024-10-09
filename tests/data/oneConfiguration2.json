@@ -1,0 +1,20 @@
+{
+    "$schema": "..\\schemas\\configuration.schema.json",
+    "name":"oneConfiguration2",
+    "destinations" : [
+        {
+            "name" : "destination1name",
+            "url" : "http://localhost:9999/",
+            "apiKey" : "61710298670ddc450de62e0f6ea2945ba685uyf3e9b3dbe75f6d496b1977b7ea7"
+        }
+    ],
+    "sources": [
+        {
+            "disabled":true,
+            "name":"source1name",
+            "importHandlerIdentifier": "source1importHandlerIdentifier",
+            "configurationType":"source1configurationType",
+            "icConfigurationIdentifier" : "source1icConfigurationIdentifier"
+        }
+    ]
+}
