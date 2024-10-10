@@ -17,16 +17,29 @@ function Get-LogFile {
         if ([String]::IsNullOrEmpty($Path)) {
             throw "Path is null or empty"
         }
-        if ([String]::IsNullOrEmpty($Prefix)) {
-            $Prefix = '*'
+        $getCIparams = @{
+            Path = $Path
+            Recurse = $true
+            File = $true
         }
-        if ([String]::IsNullOrEmpty($Suffix)) {
-            $Suffix = '*'
-        }
-        try {
-            Get-ChildItem -Path $Path -Recurse -Include "${Prefix}.${Suffix}" -File
-        } catch {
-            throw
+        if ([String]::IsNullOrEmpty($Prefix) -and [String]::IsNullOrEmpty($Suffix)) {
+            try {
+                Get-ChildItem @getCIparams
+            } catch {
+                throw
+            }
+        } else {
+            if ([String]::IsNullOrEmpty($Prefix)) {
+                $Prefix = '*'
+            }
+            if ([String]::IsNullOrEmpty($Suffix)) {
+                $Suffix = '*'
+            }
+            try {
+                Get-ChildItem @getCIparams -Include "${Prefix}.${Suffix}"
+            } catch {
+                throw
+            }
         }
     }
     
