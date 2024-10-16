@@ -3,9 +3,9 @@ param (
     [Parameter(Mandatory)]
     [String]$Name,
     [Parameter(Mandatory)]
-    [String[]]$Tags,
+    [String[]]$Tags = @('function','public'),
     [Parameter()]
-    [String]$FunctionVisibility = 'public'
+    [String]$GetSourceDataFrom
 )
 
 begin {
@@ -14,7 +14,12 @@ begin {
 
 process {
     $projectRoot = Split-Path -Path $PSScriptRoot -Parent
-    $sourceDirectory = Join-Path -Path $projectRoot -ChildPath 'source' -AdditionalChildPath $FunctionVisibility
+    if ($Tags -contains 'private') {
+        $functionVisibility = 'private'
+    } else {
+        $functionVisibility = 'public'
+    }
+    $sourceDirectory = Join-Path -Path $projectRoot -ChildPath 'source' -AdditionalChildPath $functionVisibility
     $testFunctionDirectory = Join-Path -Path $PSScriptRoot -ChildPath 'function'
     $testTemplate = Get-Content -Path (Join-Path -Path $PSScriptRoot -ChildPath 'pesterTestTemplate.ps1') -Raw
     $testFileName = "${Name}.Tests.ps1"
@@ -33,7 +38,17 @@ process {
     }
     $testTemplate = $testTemplate.Replace('--FunctionName--',$Name)
     $testTemplate | Out-File -FilePath (Join-Path -Path $testFunctionDirectory -ChildPath $testFileName) -Encoding utf8 -Force
-    $null = New-Item -Path $sourceDirectory -Name $sourceFileName -ItemType File
+    if (![String]::IsNullOrEmpty($GetSourceDataFrom)) {
+        if (Test-Path -Path $GetSourceDataFrom) {
+            $sourceData = Get-Content -Path $GetSourceDataFrom -Raw
+            $regexp = "function $Name \{.+\}"
+            $sourceData = $sourceData -match "$regexp"
+        } else {
+            Write-Warning "Unable to find $GetSourceDataFrom"
+        }
+    } else {
+        $null = New-Item -Path $sourceDirectory -Name $sourceFileName -ItemType File
+    }
 }
 
 end {
