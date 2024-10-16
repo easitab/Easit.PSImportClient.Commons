@@ -96,7 +96,7 @@ function Write-CustomLog {
             $function = $callStack[1].Command
             $lineNumber = $MyInvocation.ScriptLineNumber
         } catch {
-
+            Write-Error $_
         }
         if (!($null -eq (Get-Variable -Name 'psImportClient_loggerSettings' -ErrorAction 'SilentlyContinue'))) {
             $loggerSettings = Get-Variable -Name 'psImportClient_loggerSettings' -ValueOnly
