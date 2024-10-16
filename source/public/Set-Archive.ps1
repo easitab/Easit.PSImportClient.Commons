@@ -19,11 +19,9 @@ function Set-Archive {
         [Parameter(Mandatory)]
         [PSCustomObject]$ArchiveSettings
     )
-    
     begin {
         Write-CustomLog -Message "$($MyInvocation.MyCommand) initialized" -Level VERBOSE
     }
-    
     process {
         $ArchiveRotationInterval = $ArchiveSettings.rotationInterval
         $archiveEndOfLife = (Get-Date).AddDays("-${ArchiveRotationInterval}").Date
@@ -58,7 +56,6 @@ function Set-Archive {
             }
         }
     }
-    
     end {
         Write-CustomLog -Message "$($MyInvocation.MyCommand) end" -Level VERBOSE
     }

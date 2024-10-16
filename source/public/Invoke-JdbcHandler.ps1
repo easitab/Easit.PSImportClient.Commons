@@ -4,7 +4,7 @@ function Invoke-JdbcHandler {
         Handles imports from JDCB sources.
     .DESCRIPTION
         This function acts as a "controller" of the flow for imports from a JDCB source, for example a CSV file.
-        
+
         This function is responsible for importing the modules necessary for reading data from the source and applying the settings specified in the Easit GO ImportClient configuration and / or source coonfiguration.
 
         General flow:
@@ -51,11 +51,9 @@ function Invoke-JdbcHandler {
         [Parameter(Mandatory)]
         [PSCustomObject]$ConfigurationSourceSettings
     )
-    
     begin {
         Write-CustomLog -Message "$($MyInvocation.MyCommand) initialized" -Level VERBOSE
     }
-    
     process {
         $modulePath = Join-Path -Path $SourceDirectory -ChildPath $psImportClientSettings.dependencyModules.jdbcConfiguration
         $highestModuleVersion = Get-ChildItem -Path $modulePath -Directory | Sort-Object -Property 'Name' -Descending -Top 1
@@ -117,7 +115,6 @@ function Invoke-JdbcHandler {
         }
         return $returnObjects
     }
-    
     end {
         Write-CustomLog -Message "$($MyInvocation.MyCommand) end" -Level VERBOSE
     }

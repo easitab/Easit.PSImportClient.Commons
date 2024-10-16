@@ -49,11 +49,9 @@ function New-PropertyValue {
         [Parameter()]
         [array]$CombineCharacter
     )
-    
     begin {
         Write-CustomLog -Message "$($MyInvocation.MyCommand) initialized" -Level VERBOSE
     }
-    
     process {
         $returnValue = $null
         foreach ($attribute in $Attributes) {

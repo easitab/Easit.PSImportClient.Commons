@@ -25,11 +25,9 @@ function Add-NewCombineProperty {
         [Parameter(Mandatory)]
         [PSCustomObject]$Combine
     )
-    
     begin {
         Write-CustomLog -Message "$($MyInvocation.MyCommand) initialized" -Level VERBOSE
     }
-    
     process {
         try {
             $tempValue = New-PropertyValue -Object $InputObject -Attributes $Combine.attributes -CombineCharacter $Combine.character
@@ -53,7 +51,6 @@ function Add-NewCombineProperty {
             return
         }
     }
-    
     end {
         Write-CustomLog -Message "$($MyInvocation.MyCommand) end" -Level VERBOSE
     }

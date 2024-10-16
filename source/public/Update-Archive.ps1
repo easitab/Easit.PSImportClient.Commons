@@ -54,11 +54,9 @@ function Update-Archive {
         [Parameter()]
         [switch]$RotateArchive
     )
-    
     begin {
         Write-CustomLog -Message "$($MyInvocation.MyCommand) initialized" -Level VERBOSE
     }
-    
     process {
         if ($AddToArchive) {
             try {
@@ -97,7 +95,6 @@ function Update-Archive {
             }
         }
     }
-    
     end {
         Write-CustomLog -Message "$($MyInvocation.MyCommand) end" -Level VERBOSE
     }

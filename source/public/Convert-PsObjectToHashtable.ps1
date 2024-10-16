@@ -4,7 +4,7 @@ function Convert-PsObjectToHashtable {
         Creates a hashtable from the properties of an object.
     .DESCRIPTION
         The **Convert-PsObjectToHashtable** iterates of an objects properties, adds them to a hashtable and returns the hashtable.
-        
+
         The property name is the key and the property value its value.
     .PARAMETER InputObject
         Object to convert.
@@ -23,11 +23,9 @@ function Convert-PsObjectToHashtable {
         [Parameter(Mandatory)]
         [Object]$InputObject
     )
-    
     begin {
         Write-CustomLog -Message "$($MyInvocation.MyCommand) initialized" -Level VERBOSE
     }
-    
     process {
         $tempHash = @{}
         foreach ($prop in $InputObject.psobject.properties) {
@@ -39,7 +37,6 @@ function Convert-PsObjectToHashtable {
         }
         return $tempHash
     }
-    
     end {
         Write-CustomLog -Message "$($MyInvocation.MyCommand) end" -Level VERBOSE
     }

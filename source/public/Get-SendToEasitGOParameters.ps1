@@ -4,7 +4,7 @@ function Get-SendToEasitGOParameters {
         Get parameters for *Get-SendToEasit* as hashtable.
     .DESCRIPTION
         The **Get-SendToEasitGOParameters** creates a hashtable for the parameters to be used with *Send-ToEasitGO*.
-        
+
         When settings from the configuration file is imported and converted from JSON we get a PSCustomObject back. To be able to use splatting we need to convert that object to a hashtable.
     .PARAMETER SourceSettings
         Object with settings for source.
@@ -26,11 +26,9 @@ function Get-SendToEasitGOParameters {
         [Parameter(Mandatory)]
         [PSCustomObject]$DestinationSettings
     )
-    
     begin {
         Write-CustomLog -Message "$($MyInvocation.MyCommand) initialized" -Level VERBOSE
     }
-    
     process {
         $sendToEasitGOParams = @{
             Url = $DestinationSettings.url
@@ -65,7 +63,6 @@ function Get-SendToEasitGOParameters {
         }
         return $sendToEasitGOParams
     }
-    
     end {
         Write-CustomLog -Message "$($MyInvocation.MyCommand) end" -Level VERBOSE
     }

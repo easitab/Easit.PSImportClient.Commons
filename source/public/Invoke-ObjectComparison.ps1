@@ -37,14 +37,12 @@ function Invoke-ObjectComparison {
         [Parameter(Mandatory)]
         [PSCustomObject]$CompareSettings
     )
-    
     begin {
         Write-CustomLog -Message "$($MyInvocation.MyCommand) initialized" -Level VERBOSE
         $refDiffCount = 0
         $diffDiffCount = 0
         $equalDiffCount = 0
     }
-    
     process {
         $compareObjectParameters = @{
             ReferenceObject = $ReferenceObject
@@ -105,7 +103,6 @@ function Invoke-ObjectComparison {
         Write-CustomLog -Message "equalDiffCount = $equalDiffCount" -Level DEBUG
         Write-CustomLog -Message "refDiffCount = $refDiffCount" -Level DEBUG
     }
-    
     end {
         Write-CustomLog -Message "$($MyInvocation.MyCommand) end" -Level VERBOSE
     }

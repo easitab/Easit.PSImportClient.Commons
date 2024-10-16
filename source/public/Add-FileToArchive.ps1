@@ -41,11 +41,9 @@ function Add-FileToArchive {
         [Parameter(Mandatory)]
         [string]$SourceName
     )
-    
     begin {
         Write-CustomLog -Message "$($MyInvocation.MyCommand) initialized" -Level VERBOSE
     }
-    
     process {
         if (Test-Path -Path $FileToArchive) {
             $nowDate = Get-Date -Format "yyyy-MM-dd"
@@ -74,7 +72,6 @@ function Add-FileToArchive {
             throw "Unable to find $FileToArchive"
         }
     }
-    
     end {
         Write-CustomLog -Message "$($MyInvocation.MyCommand) end" -Level VERBOSE
     }

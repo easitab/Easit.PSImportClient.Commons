@@ -41,11 +41,9 @@ function Get-Configuration {
         [Parameter()]
         [String[]]$ConfigurationFile
     )
-    
     begin {
         Write-CustomLog -Message "$($MyInvocation.MyCommand) initialized" -Level VERBOSE
     }
-    
     process {
         if (([String]::IsNullOrEmpty($PsImportClientDirectory)) -and ([String]::IsNullOrEmpty($ConfigurationFile))) {
             Write-CustomLog -Message "Both parameters are null" -Level ERROR
@@ -106,7 +104,6 @@ function Get-Configuration {
         }
         return $configObjects
     }
-    
     end {
         Write-CustomLog -Message "$($MyInvocation.MyCommand) end" -Level VERBOSE
     }

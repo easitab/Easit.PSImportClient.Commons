@@ -20,7 +20,6 @@ function Send-Notification {
         [Parameter(Mandatory,Position=0)]
         [PSCustomObject]$Settings
     )
-    
     begin {
         Write-CustomLog -Message "$($MyInvocation.MyCommand) initialized" -Level VERBOSE
         <#
@@ -29,7 +28,6 @@ function Send-Notification {
             functions to do the actual sending (For example, Send-SmtpNotification or Invoke-SmtpNotification).
         #>
     }
-    
     process {
         if ($Settings.type -eq 'smtp') {
             if ([string]::IsNullOrEmpty($Settings.Subject)) {
@@ -93,7 +91,6 @@ function Send-Notification {
             throw "Unknown notification type ($($Settings.type))"
         }
     }
-    
     end {
         Write-CustomLog -Message "$($MyInvocation.MyCommand) end" -Level VERBOSE
     }

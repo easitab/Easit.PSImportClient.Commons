@@ -46,11 +46,9 @@ function Invoke-DestinationAndSourceSync {
         [Parameter()]
         [PSCustomObject]$Source
     )
-    
     begin {
         Write-CustomLog -Message "$($MyInvocation.MyCommand) initialized" -Level VERBOSE
     }
-    
     process {
         if (($null -eq $destination.url -or [String]::IsNullOrEmpty($destination.url)) -and ($null -eq $source.url -or [String]::IsNullOrEmpty($source.url))) {
             Write-CustomLog -Message "url for both destination and source is null" -Level ERROR
@@ -135,7 +133,6 @@ function Invoke-DestinationAndSourceSync {
             }
         }
     }
-    
     end {
         Write-CustomLog -Message "$($MyInvocation.MyCommand) end" -Level VERBOSE
     }

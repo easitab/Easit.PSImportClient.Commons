@@ -19,11 +19,9 @@ function Test-ArchiveSettings {
         [Parameter(Mandatory)]
         [PSCustomObject]$Settings
     )
-    
     begin {
         Write-CustomLog -Message "$($MyInvocation.MyCommand) initialized" -Level VERBOSE
     }
-    
     process {
         foreach ($setting in $Settings.psobject.properties.GetEnumerator()) {
             if ($setting.value.GetType().Name -ne 'String') {
@@ -37,7 +35,6 @@ function Test-ArchiveSettings {
             }
         }
     }
-    
     end {
         Write-CustomLog -Message "$($MyInvocation.MyCommand) end" -Level VERBOSE
     }

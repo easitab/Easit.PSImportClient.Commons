@@ -28,11 +28,9 @@ function Test-Configuration {
         [Parameter()]
         [string]$SchemaFile
     )
-    
     begin {
         Write-CustomLog -Message "$($MyInvocation.MyCommand) initialized" -Level VERBOSE
     }
-    
     process {
         if ([String]::IsNullOrEmpty($Json) -or $null -eq $Json) {
             Write-CustomLog -Message "JSON string is null or empty" -Level ERROR
@@ -63,7 +61,6 @@ function Test-Configuration {
             throw
         }
     }
-    
     end {
         Write-CustomLog -Message "$($MyInvocation.MyCommand) end" -Level VERBOSE
     }
