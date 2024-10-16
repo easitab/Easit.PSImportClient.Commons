@@ -18,13 +18,12 @@ function Get-LogFile {
             throw "Path is null or empty"
         }
         $getCIparams = @{
-            Path = $Path
             Recurse = $true
             File = $true
         }
         if ([String]::IsNullOrEmpty($Prefix) -and [String]::IsNullOrEmpty($Suffix)) {
             try {
-                Get-ChildItem @getCIparams
+                Get-ChildItem -Path "$Path\*" @getCIparams
             } catch {
                 throw
             }
@@ -36,7 +35,7 @@ function Get-LogFile {
                 $Suffix = '*'
             }
             try {
-                Get-ChildItem @getCIparams -Include "${Prefix}.${Suffix}"
+                Get-ChildItem -Path $Path @getCIparams -Include "${Prefix}.${Suffix}"
             } catch {
                 throw
             }
